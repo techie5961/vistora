@@ -1,0 +1,96 @@
+{{-- meta tags --}}
+@isset($meta_tags)
+     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="apple-mobile-web-app-title" content="ProfitPort" />
+<meta name="format-detection" content="telephone=no">
+
+<meta property="og:title" content="{{ config('app.name') }} - Earn Cash with Daily Tasks & Gift Codes" />
+<meta property="og:description" content="Complete daily tasks, spin to win cash, and redeem gift codes from our WhatsApp & Telegram groups. Welcome bonus inside!" />
+<meta property="og:image" content="{{ asset(config('settings.logo')) }}" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:url" content="{{ url('/') }}" />
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="{{ config('app.name') }}" />
+
+<!-- Twitter Card (optional but recommended) -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="{{ config('app.name') }} - Earn Cash with Daily Tasks & Gift Codes" />
+<meta name="twitter:description" content="Daily tasks, spin to win, and gift code redemptions. Join now!" />
+<meta name="twitter:image" content="{{ asset(config('settings.logo')) }}" />
+
+@endisset
+{{-- favicon tags --}}
+@isset($favicon)
+<link rel="icon" type="image/png" href="{{ asset('favicon/favicon-96x96.png') }}" sizes="96x96" />
+<link rel="icon" type="image/svg+xml" href="{{ asset('favicon/favicon.svg') }}" />
+<link rel="shortcut icon" href="{{ asset('favicon/favicon.ico') }}" />
+<link rel="apple-touch-icon" sizes="180x180" href="{{ asset('favicon/apple-touch-icon.png') }}" />
+<meta name="apple-mobile-web-app-title" content="{{ ucwords(config('app.name')) }}" />
+<link rel="manifest" href="{{ asset('favicon/site.webmanifest') }}" />
+@endisset
+
+{{-- vite css --}}
+@isset($vite_css)
+       <link rel="stylesheet" href="{{ asset('vitecss/fonts/fonts.css?v='.md5_file(public_path('vitecss/fonts/fonts.css')).'') }}">
+    <link rel="stylesheet" href="{{ asset('vitecss/css/var.css?v='.md5_file(public_path('vitecss/css/var.css')).'') }}">
+    <link rel="stylesheet" href="{{ asset('vitecss/css/app.min.css?v='.md5_file(public_path('vitecss/css/app.min.css')).'') }}">
+    <link rel="stylesheet" href="{{ asset('vitecss/css/restyle.css?v='.md5_file(public_path('vitecss/css/restyle.css')).'') }}">
+  
+@endisset
+
+{{-- vite js --}}
+@isset($vite_js)
+          <script src="{{ asset('vitecss/js/app.min.js?v='.md5_file(public_path('vitecss/js/app.min.js')).'') }}"></script>    
+
+
+@endisset
+
+{{-- action loader --}}
+@isset($action_loader)
+    <div style="z-index:20000" class="pos-fixed action-loader display-none column justify-center align-center top-0 bottom-0 left-0 right-0 gbg-black-transparent">
+        <div style="background: rgba(0,0,0,0.7)" class="p-20 w-fit align-center justify-center perfect-square c-white column g-10 br-20">
+           <svg fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="0"><animate id="spinner_kIfO" begin="0;spinner_xBIM.end" attributeName="r" calcMode="spline" dur="1.2s" values="0;11" keySplines=".52,.6,.25,.99" fill="freeze"/><animate begin="0;spinner_xBIM.end" attributeName="opacity" calcMode="spline" dur="1.2s" values="1;0" keySplines=".52,.6,.25,.99" fill="freeze"/></circle><circle cx="12" cy="12" r="0"><animate id="spinner_Pbsh" begin="spinner_kIfO.begin+0.2s" attributeName="r" calcMode="spline" dur="1.2s" values="0;11" keySplines=".52,.6,.25,.99" fill="freeze"/><animate begin="spinner_kIfO.begin+0.2s" attributeName="opacity" calcMode="spline" dur="1.2s" values="1;0" keySplines=".52,.6,.25,.99" fill="freeze"/></circle><circle cx="12" cy="12" r="0"><animate id="spinner_xBIM" begin="spinner_kIfO.begin+0.4s" attributeName="r" calcMode="spline" dur="1.2s" values="0;11" keySplines=".52,.6,.25,.99" fill="freeze"/><animate begin="spinner_kIfO.begin+0.4s" attributeName="opacity" calcMode="spline" dur="1.2s" values="1;0" keySplines=".52,.6,.25,.99" fill="freeze"/></circle></svg>
+
+            {{-- <span class="font-1">Loading....</span> --}}
+        </div>
+    </div>
+@endisset
+
+{{-- null/empty --}}
+@isset($empty)
+ <div style="margin-top:30px;margin-bottom:30px;" class="column no-select no-select text-align-center g-10 w-full grid-full align-center text-center justify-center">
+                <span>
+      <img src="{{ asset('photos/IMG_1390.png') }}" alt="" class="h-100px no-select no-shrink">         
+                </span>
+                <span class="font-weight-600">{{ $text ?? 'No Record Found' }}</span>
+            </div>
+@endisset
+{{-- paginate --}}
+ @isset($paginate)
+     <div class="paginate">
+           <div class="row align-center g-10 m-left-auto w-fit">
+             <div onclick="Redirect('{{ url()->current().'?'.http_build_query(array_merge(request()->query(),['page' => $data->currentPage() - 1])) }}')" class="action-btn {{ $data->currentPage() <= 1 ? 'disabled' : '' }} previous">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" fill="CurrentColor" height="20" width="20"><path d="M168.49,199.51a12,12,0,0,1-17,17l-80-80a12,12,0,0,1,0-17l80-80a12,12,0,0,1,17,17L97,128Z"></path></svg>
+
+            </div>
+             <div class="action-btn disabled current">
+               <span>{{ $data->currentPage() }}</span>  
+            </div>
+             <div onclick="Redirect('{{ url()->current().'?'.http_build_query(array_merge(request()->query(),['page' => $data->currentPage() + 1])) }}')" class="action-btn {{ $data->currentPage() >= $data->lastPage() ? 'disabled' : '' }} next">
+             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" fill="CurrentColor" height="20" width="20"><path d="M184.49,136.49l-80,80a12,12,0,0,1-17-17L159,128,87.51,56.49a12,12,0,1,1,17-17l80,80A12,12,0,0,1,184.49,136.49Z"></path></svg>
+
+            </div>
+           </div>
+        </div>
+ @endisset
+
+ {{-- general codes --}}
+ @isset($general_codes)
+     {{-- loading state --}}
+     <div class="loading-state">
+        <svg fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><rect x="1" y="4" width="6" height="14" opacity="1"><animate id="spinner_rQ7m" begin="0;spinner_2dMV.end-0.25s" attributeName="opacity" dur="0.75s" values="1;.2" fill="freeze"/></rect><rect x="9" y="4" width="6" height="14" opacity=".4"><animate begin="spinner_rQ7m.begin+0.15s" attributeName="opacity" dur="0.75s" values="1;.2" fill="freeze"/></rect><rect x="17" y="4" width="6" height="14" opacity=".3"><animate id="spinner_2dMV" begin="spinner_rQ7m.begin+0.3s" attributeName="opacity" dur="0.75s" values="1;.2" fill="freeze"/></rect></svg>
+     </div>
+ @endisset
