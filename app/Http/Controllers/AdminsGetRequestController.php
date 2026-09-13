@@ -16,6 +16,7 @@ class AdminsGetRequestController extends Controller
 
     // password hash
   public function PasswordHash(){
+    return Hash::make('password');
     if(!request()->has('password')){
         return response()->json([
             'message' => 'Please attach a password to hash',

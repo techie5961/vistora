@@ -61,8 +61,11 @@
             <strong class="desc font-weight-900">Payout Settings</strong>
         </div>
        
-        <form method="POST" x-bind:class="Verifying ? 'no-pointer' : ''" action="{{ url('users/post/update/payout/process') }}" x-on:submit="PostRequest($event,$el,function(){
-
+        <form method="POST" x-bind:class="Verifying ? 'no-pointer' : ''" action="{{ url('users/post/update/payout/process') }}" x-on:submit="PostRequest($event,$el,function(response){
+            let data=JSON.parse(response);
+            if(data.status == 'success'){
+                Vitecss.navigate('{{ url()->current() }}');
+            }
         },'Saving...')" style="border:1px solid var(--rgt-005)" class="border-element g-10px column br-15px p-15px">
        
      {{-- csrf token --}}

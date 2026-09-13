@@ -52,7 +52,11 @@
    
   </script>
     <style>
-       
+         @font-face {
+    font-family: 'Bricolage';
+    src: url('{{ asset('vitecss/fonts/BricolageGrotesque-VariableFont_opsz,wdth,wght.ttf') }}') format('truetype');
+    font-display: swap;
+}
       body{
         overflow-x: hidden;
        
