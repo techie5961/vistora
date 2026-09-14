@@ -34,7 +34,6 @@
                 
                 <input name="password" readonly autocomplete="new-password" onfocus="this.removeAttribute('readonly')" placeholder="Account password" type="password" class="inp input required">
             </div>
-            <span onclick="Vitecss.navigate('{{ url('users/forgot/password') }}')" class="block m-left-auto c-primary no-select pointer">Forgot Password?</span>
         </div>
        
         

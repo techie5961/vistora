@@ -12,7 +12,7 @@
             </div>
             <div class="column g-5">
                 <span>Total Songs</span>
-                <strong class="desc">{{ number_format($total) }}</strong>
+                <strong class="desc font-weight-900">{{ number_format($total) }}</strong>
             </div>
         </div>
       
@@ -36,7 +36,7 @@
                         
                     <div vitecss-marquee vitecss-marquee-check vitecss-marquee-duplicates="0">
                         <div>
-                            <strong class="font-1 ws-nowrap">{{ $data->name }}</strong>
+                            <strong class="font-size-1rem font-weight-900 ws-nowrap">{{ $data->name }}</strong>
                         </div>
                         </div>
                         {{-- new row --}}

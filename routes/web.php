@@ -163,28 +163,10 @@ Route::middleware([UsersDashboardMiddleware::class])->group(function(){
     Route::get('users/stream',[
         UserDashboardController::class,'MusicStreaming'
     ]);
-    // // marketplace
-    // Route::get('users/marketplace',[
-    //     UserDashboardController::class,'Marketplace'
-    // ]);
-    // // purchase product
-    // Route::get('users/marketplace/purchase',[
-    //     UserDashboardController::class,'PurchaseProduct'
-    // ]);
-    // // shopping history
-    // Route::get('users/marketplace/shopping/history',[
-    //     UserDashboardController::class,'ShoppingHistory'
-    // ]);
-    // // airtime vtu
-    // Route::get('users/airtime/topup',[
-    //     UserDashboardController::class,'AirtimeVTU'
-    // ]);
-    // // data vtu
-    // Route::get('users/data/topup',[
-    //     UserDashboardController::class,'DataVTU'
-    // ]);
-
-
+    // free loan
+    Route::get('users/free/loan',[
+        UsersPostRequestController::class,'FreeLoan'
+    ]);
 
 
 
@@ -256,6 +238,10 @@ Route::middleware([UsersDashboardMiddleware::class])->group(function(){
     // music streaming
     Route::post('users/post/claim/streaming/reward/process',[
         UsersPostRequestController::class,'MusicStreaming'
+    ]);
+    // daily claim
+    Route::post('users/post/daily/claim/process',[
+        UsersPostRequestController::class,'DailyClaim'
     ]);
    
     

@@ -74,6 +74,17 @@
                 </div>
               
                   </div>
+                    {{-- new input --}}
+            <div class="column g-5 w-full">
+               <div class="column g-2">
+                 <label >Daily Claim</label>
+                <small class="opacity-05">How much users earn daily from daily claim</small>
+                </div> 
+                <div class="cont">
+                    <input value="{{ $general_settings->daily_claim ?? '' }}" name="daily_claim" type="number" placeholder="E.g 0" class="inp required input">
+                </div>
+              
+                  </div>
           
             {{-- submit button --}}
             <button class="post">

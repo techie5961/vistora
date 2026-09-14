@@ -43,6 +43,20 @@ if(Music &&  Music instanceof Audio){
     Music.pause();
 }
  })
+ $watch('TrackModal', (value) => {
+    if(value){
+        document.body.classList.add('overflow-hidden');
+    }else{
+        document.body.classList.remove('overflow-hidden');
+    }
+ })
+ $watch('RewardModal', (value) => {
+    if(value){
+        document.body.classList.add('overflow-hidden');
+    }else{
+        document.body.classList.remove('overflow-hidden');
+    }
+ })
  " class="w-full column g-10px">
 
 {{-- populate --}}

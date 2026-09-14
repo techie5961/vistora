@@ -129,7 +129,8 @@ class AdminsPostRequestController extends Controller
         'referral_commission' => request('referral_commission'),
         'task' => [
             'penalty' => request('task_penalty')
-        ]
+        ],
+        'daily_claim' => request('daily_claim')
         ];
        if(DB::table('settings')->where('key',$key)->exists()){
      DB::table('settings')->where('key',$key)->update([

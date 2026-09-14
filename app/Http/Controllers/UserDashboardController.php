@@ -24,7 +24,7 @@ class UserDashboardController extends Controller
     // dashboard
     public function Dashboard(){
         $transactions=DB::table('transactions')->where('user_id',Auth::guard('users')->user()->id)->whereNot('status','initiated');
-       $transactions=$transactions->orderBy('date','desc')->paginate(10);
+       $transactions=$transactions->orderBy('date','desc')->paginate(5);
        $transactions->getCollection()->transform(function($each){
                $each->frame=Carbon::parse($each->date)->diffForHumans();
                 return $each;

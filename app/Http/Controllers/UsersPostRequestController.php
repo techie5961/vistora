@@ -1456,5 +1456,55 @@ $id=GenerateID();
                 'status' => 'error'
             ]);
         }
-    }                                                                                                                                                                                                                                                                                                                                                                                                     
+    }
+    
+    // daily claim
+    public function DailyClaim(){
+        $daily_claim=json_decode(DB::table('settings')->where('key','general_settings')->first()->value ?? '{}')->daily_claim ?? 0;
+    if(DB::table('transactions')->where('type','daily_claim')->whereDate('date',Carbon::today())->exists()){
+        return response()->json([
+            'message' => 'You already claimed today',
+            'status' => 'info'
+        ]);
+    }
+    DB::transaction(function() use($daily_claim){
+    DB::table('users')->where('id',Auth::guard('users')->user()->id)->increment('main_balance',$daily_claim);
+DB::table('transactions')->insert([
+    'uniqid' => GenerateID(),
+    'user_id' => Auth::guard('users')->user()->id,
+    'title' => 'Daily Claim',
+    'class' => 'credit',
+    'type' => 'daily_claim',
+    'amount' => $daily_claim,
+    'icon' => '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" fill="CurrentColor" height="20" width="20"><path d="M215.38,14.54a12,12,0,0,0-10.29-2.18l-128,32A12,12,0,0,0,68,56V159.35A40,40,0,1,0,92,196V113.37l104-26v40A40,40,0,1,0,220,164V24A12,12,0,0,0,215.38,14.54ZM52,212a16,16,0,1,1,16-16A16,16,0,0,1,52,212ZM92,88.63V65.37l104-26V62.63ZM180,180a16,16,0,1,1,16-16A16,16,0,0,1,180,180Z"></path></svg>',
+    'fee' => 0,
+    'wallet' => json_encode([
+        'from' => 'admin',
+        'to' => 'main_balance',
+
+    ]),
+     'json' => json_encode([
+    'balance' => [
+        'before' => 0,
+        'after' => 0
+    ],
+    'primary_wallet' => 'Main Wallet'
+
+    ]),
+    'data' => json_encode([]),
+    'status' => 'success',
+    'updated' => Carbon::now(),
+    'date' => Carbon::now()
+    ]);
+    });
+    return response()->json([
+        'message' => 'Daily claim successfull',
+        'status' => 'success'
+    ]);
+    }
+
+    // free loan
+    public function FreeLoan(){
+        return view('users.loan');
+    }
 }
