@@ -79,9 +79,13 @@
     Toast : {
         Show : false,
         Type :  'success',
-        Message : ' Daily claim successfull'
-    }
- }" x-init="$watch('Toast.Show', (value) => {
+        Message : ' Daily claim successfull',
+    },
+    Modal : true
+
+ }" x-init="
+ document.body.classList.add('overflow-hidden');
+ $watch('Toast.Show', (value) => {
     if(value){
         setTimeout(() => {
             Toast.Show = false;
@@ -90,7 +94,34 @@
             }
         }, 1000);
     }
- })" class="column w-full g-10">
+ });
+ $watch('Modal', (value) => {
+    if(value){
+        document.body.classList.add('overflow-hidden');
+    }else{
+        document.body.classList.remove('overflow-hidden');
+    }
+ })
+ " class="column w-full g-10">
+
+ {{-- modal --}}
+ <section x-transition:leave-start="fade-leave" x-transition:leave-end="fade-leave-end" x-show="Modal" class="pos-fixed p-25px transition-all z-index-6000 inset-0 bg-black-transparent backdrop-blur-2px no-select column align-center justify-center">
+    <div x-on:click.outside="Modal = false" x-transition:leave-start="fade-leave" x-transition:leave-end="fade-leave-end" class="column transition-all g-10px border-width-1px max-w-500px border-style-solid border-color-primary p-20px br-10px bg align-center text-align-center">
+        <strong class="font-weight-900 font-size-1-5rem">Join Our Community</strong>
+        <span class="opacity-07">Stay updated with the latest earning tassk, giveaways, and official announcements.</span>
+     <button x-data="{ 
+            Link : '{{ $social_settings->whatsapp_community ?? '' }}'
+         }" x-on:click="window.open(Link)" style="background:linear-gradient(#25d366,green);border:1px solid #02fd5e" class="btn-whatsapp br-10px p-10px w-full">
+            Join Whatsapp
+        </button>
+         <button x-data="{ 
+            Link : '{{ $social_settings->telegram_community ?? '' }}'
+          }" x-on:click="window.open(Link)" style="background:linear-gradient(#0088cc,#01517c);border:1px solid #02abff" class="btn-whatsapp br-10px p-10px w-full">
+            Join Telegram
+        </button>
+        <span x-on:click="Modal = false;" class="opacity-07 no-select u">I'll Join Later</span>
+    </div>
+ </section>
     <div x-bind:style="Toast.Type == 'success' ? {
         'background' : '#4caf50',
         'color' : 'white'
